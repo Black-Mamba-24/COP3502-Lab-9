@@ -1,7 +1,5 @@
 ##
 # this is Parth Patel's file
-
-
 def encode(password):
     if not password.isdigit() or len(password) != 8:
         raise ValueError("Password should be an 8-digit string containing only integers.")
@@ -12,6 +10,15 @@ def encode(password):
         encoded_password += encoded_digit
 
     return encoded_password
+
+def decode(encoded_password):
+    # Assuming the encoded_password is a valid encoded
+    decoded_password = ''
+    for digit in encoded_password:
+        decoded_digit = str((int(digit) - 3) % 10)  # Decoding logic
+        decoded_password += decoded_digit
+
+    return decoded_password
 
 
 if __name__ == '__main__':
@@ -30,7 +37,12 @@ if __name__ == '__main__':
         print(f"Encoded password: {encoded_password}")
 
     elif int(input("Enter your choice: ")) == 2:
-        print("")
+        try:
+            original_password = decode(encoded_password)  # Use the most recently encoded password
+            print(f"The encoded password is {encoded_password}, and the original password is {original_password}.")
+        except NameError:
+            print("No password has been encoded yet. Please encode a password first.")
+
 
     elif int(input("Enter your choice: ")) == 3:
         print("Exiting...")
@@ -41,6 +53,8 @@ if __name__ == '__main__':
     while True:
 
         break
+
+
 
 
 
